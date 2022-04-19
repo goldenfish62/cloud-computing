@@ -4,9 +4,9 @@
 counter=1 
 while [ $counter -le 5 ] 
     do 
-        #sysbench --num-threads=2 --test=cpu --cpu-max-prime=100000000 run 
-        #sysbench --num-threads=4 --test=cpu --cpu-max-prime=100000000 run 
-        #sysbench --num-threads=8 --test=cpu --cpu-max-prime=100000000 run 
+        sysbench --num-threads=2 --test=cpu --cpu-max-prime=100000 run 
+        sysbench --num-threads=4 --test=cpu --cpu-max-prime=100000 run 
+        sysbench --num-threads=8 --test=cpu --cpu-max-prime=100000 run 
         ((counter++)) 
     done 
 echo CPU All done 
@@ -15,18 +15,15 @@ echo CPU All done
 counter=1 
 while [ $counter -le 5 ] 
     do 
-        sysbench --num-threads=2 --test=fileio --file-total-size=2G --file-test-mode=seqrd prepare 
-        sysbench --num-threads=2 --test=fileio --file-total-size=2G --file-test-mode=seqrd run 
-        sysbench --num-threads=2 --test=fileio --file-total-size=2G --file-test-mode=seqrd cleanup
-        echo 3 | sudo tee /proc/sys/vm/drop_caches
-        sysbench --num-threads=4 --test=fileio --file-total-size=2G --file-test-mode=seqrd prepare
-        sysbench --num-threads=4 --test=fileio --file-total-size=2G --file-test-mode=seqrd run
-        sysbench --num-threads=4 --test=fileio --file-total-size=2G --file-test-mode=seqrd cleanup
-        echo 3 | sudo tee /proc/sys/vm/drop_caches
-        sysbench --num-threads=8 --test=fileio --file-total-size=2G --file-test-mode=seqrd prepare
-        sysbench --num-threads=8 --test=fileio --file-total-size=2G --file-test-mode=seqrd run
-        sysbench --num-threads=8 --test=fileio --file-total-size=2G --file-test-mode=seqrd cleanup
-        echo 3 | sudo tee /proc/sys/vm/drop_caches
+        sysbench --num-threads=1 --test=fileio --file-total-size=1G --file-test-mode=seqrd prepare 
+        sysbench --num-threads=1 --test=fileio --file-total-size=1G --file-test-mode=seqrd run 
+        sysbench --num-threads=1 --test=fileio --file-total-size=1G --file-test-mode=seqrd cleanup
+        sysbench --num-threads=2 --test=fileio --file-total-size=1G --file-test-mode=seqrd prepare
+        sysbench --num-threads=2 --test=fileio --file-total-size=1G --file-test-mode=seqrd run
+        sysbench --num-threads=2 --test=fileio --file-total-size=1G --file-test-mode=seqrd cleanup
+        sysbench --num-threads=4 --test=fileio --file-total-size=1G --file-test-mode=seqrd prepare
+        sysbench --num-threads=4 --test=fileio --file-total-size=1G --file-test-mode=seqrd run
+        sysbench --num-threads=4 --test=fileio --file-total-size=1G --file-test-mode=seqrd cleanup
         ((counter++))
     done
 echo fileio-seqrd All done
@@ -35,17 +32,17 @@ echo fileio-seqrd All done
 counter=1 
 while [ $counter -le 5 ] 
     do 
-        sysbench --num-threads=2 --test=fileio --file-total-size=2G --file-test-mode=seqwr prepare 
-        sysbench --num-threads=2 --test=fileio --file-total-size=2G --file-test-mode=seqwr run 
-        sysbench --num-threads=2 --test=fileio --file-total-size=2G --file-test-mode=seqwr cleanup
+        sysbench --num-threads=1 --test=fileio --file-total-size=1G --file-test-mode=seqwr prepare 
+        sysbench --num-threads=1 --test=fileio --file-total-size=1G --file-test-mode=seqwr run 
+        sysbench --num-threads=1 --test=fileio --file-total-size=1G --file-test-mode=seqwr cleanup
         echo 3 | sudo tee /proc/sys/vm/drop_caches
-        sysbench --num-threads=4 --test=fileio --file-total-size=2G --file-test-mode=seqwr prepare
-        sysbench --num-threads=4 --test=fileio --file-total-size=2G --file-test-mode=seqwr run
-        sysbench --num-threads=4 --test=fileio --file-total-size=2G --file-test-mode=seqwr cleanup
+        sysbench --num-threads=2 --test=fileio --file-total-size=1G --file-test-mode=seqwr prepare
+        sysbench --num-threads=2 --test=fileio --file-total-size=1G --file-test-mode=seqwr run
+        sysbench --num-threads=2 --test=fileio --file-total-size=1G --file-test-mode=seqwr cleanup
         echo 3 | sudo tee /proc/sys/vm/drop_caches
-        sysbench --num-threads=8 --test=fileio --file-total-size=2G --file-test-mode=seqwr prepare
-        sysbench --num-threads=8 --test=fileio --file-total-size=2G --file-test-mode=seqwr run
-        sysbench --num-threads=8 --test=fileio --file-total-size=2G --file-test-mode=seqwr cleanup
+        sysbench --num-threads=4 --test=fileio --file-total-size=1G --file-test-mode=seqwr prepare
+        sysbench --num-threads=4 --test=fileio --file-total-size=1G --file-test-mode=seqwr run
+        sysbench --num-threads=4 --test=fileio --file-total-size=1G --file-test-mode=seqwr cleanup
         echo 3 | sudo tee /proc/sys/vm/drop_caches
         ((counter++))
     done
