@@ -96,6 +96,8 @@ class Tutorial (object):
     # This part looks familiar, right?
     #print(str(packet.dst) + " not known, resend to everybody")
       self.resend_packet(packet_in, of.OFPP_ALL)
+      
+      
 
 
   def _handle_PacketIn (self, event):
